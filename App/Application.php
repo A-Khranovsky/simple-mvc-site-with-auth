@@ -29,7 +29,7 @@ class Application
             $router->queryParams
         );
 
-        echo $controllerActionResult;
+        echo var_dump($controllerActionResult);
 
 
         //$user = new User($db);

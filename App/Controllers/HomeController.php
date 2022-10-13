@@ -16,6 +16,6 @@ class HomeController extends Controller
 
     public function home()
     {
-        return 'home';
+        return $this->user->login('alex', SHA1('password'));
     }
 }

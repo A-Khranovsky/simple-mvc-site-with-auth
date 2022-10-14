@@ -26,6 +26,28 @@ class User extends Model
         ]);
         return $result->fetch(Database::FETCH_ASSOC);
     }
+
+    public function getAllById($id)
+    {
+        $sql = "select * from users where id=:id";
+
+        $result = $this->database->pdo->prepare($sql);
+        $result->execute([
+            'id' => $id
+        ]);
+        return $result->fetch(Database::FETCH_ASSOC);
+    }
+
+    public function getAllLoginId($login)
+    {
+        $sql = "select * from users where login=:login";
+
+        $result = $this->database->pdo->prepare($sql);
+        $result->execute([
+            'login' => $login
+        ]);
+        return $result->fetch(Database::FETCH_ASSOC);
+    }
 //    {
 //        ini_set ("session.use_trans_sid", true);    session_start();    if (isset($_SESSION['id']))//если сесcия есть
 //

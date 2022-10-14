@@ -9,3 +9,5 @@ use App\Application;
 /** @var $connection */
 
 $obj = new Application($connection, $_SERVER['REQUEST_URI']);
+
+echo $obj->controllerActionResult;

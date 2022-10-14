@@ -13,6 +13,7 @@ use App\Router\Router;
 
 class Application
 {
+    public array|string|null  $controllerActionResult;
     /**
      * @throws \Exception
      */
@@ -22,17 +23,12 @@ class Application
         $router = Router::run($uri);
         Route::take()->run($router);
         Model::run($db);
-        $controllerActionResult = Controller::run(
+        $this->controllerActionResult = Controller::run(
             $router->resource,
             $router->id,
             $router->controllerAction,
             $router->queryParams
         );
-
-        echo var_dump($controllerActionResult);
-
-
         //$user = new User($db);
-
     }
 }

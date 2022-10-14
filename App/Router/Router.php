@@ -65,15 +65,12 @@ class Router
         public string|null $action = null
     )
     {
-        //exit(var_dump($action));
         $this->queryParams = match (true) {
             !empty($_REQUEST) => $_REQUEST, // get method
-            !empty(file_get_contents("php://input")) => json_decode(
-                file_get_contents("php://input"), true
-            ),
+            !empty(file_get_contents("php://input")) => file_get_contents("php://input"),
             default => [],
         };
-
+        //exit(var_dump($this->queryParams));
         $this->queryType = $_SERVER['REQUEST_METHOD'];
         if ($this->queryType == 'POST' && array_key_exists('HTTP_X_HTTP_METHOD', $_SERVER)) {
             if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'DELETE') {

@@ -10,7 +10,7 @@ class Home extends View
     {
         $title = 'Login';
         $body = <<<HTML
-        <form method="POST" action="/api/login">
+        <form method="POST" action="/api/home/login">
         Enter user name: <br>
         <input type="text" name="user" /><br>
         Enter password: <br>

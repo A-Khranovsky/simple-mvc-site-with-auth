@@ -21,8 +21,9 @@ abstract class Controller
         $controllerClass = __NAMESPACE__ . '\\' . ucfirst($controllerName);
         if (class_exists($controllerClass)) {
             $controller = new $controllerClass;
-            //exit(var_dump($action));
+
             $params = (is_null($id) && !empty($queryParams)) ? $queryParams : [$id, $queryParams];
+            //exit(var_dump($params));
             return call_user_func_array([$controller, $action], $params);
         } else {
             throw new \Exception('Not found', 404);

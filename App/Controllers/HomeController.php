@@ -20,7 +20,11 @@ class HomeController extends Controller
 
     public function home()
     {
-        //return $this->user->login('alex', SHA1('password'));
         return $this->home->authForm()->render();
+    }
+
+    public function login(...$params)
+    {
+        return var_dump($params);
     }
 }

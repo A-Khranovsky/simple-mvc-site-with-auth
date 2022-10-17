@@ -14,14 +14,18 @@ abstract class Controller
         string $resource,
         int|null $id,
         string|null $action,
-        array $queryParams
+        array $queryParams,
+        string|null $controller,
     ): array|string|null
     {
-        $controllerName = $resource . 'Controller';
+        if(!is_null($controller)) {
+            $controllerName = $controller;
+        } else {
+            $controllerName = $resource . 'Controller';
+        }
         $controllerClass = __NAMESPACE__ . '\\' . ucfirst($controllerName);
         if (class_exists($controllerClass)) {
             $controller = new $controllerClass;
-
             $params = (is_null($id) && !empty($queryParams)) ? $queryParams : [$id, $queryParams];
             //exit(var_dump($params));
             return call_user_func_array([$controller, $action], $params);

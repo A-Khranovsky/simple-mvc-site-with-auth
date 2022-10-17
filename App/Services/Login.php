@@ -9,49 +9,52 @@ use App\models\User;
 
 class Login
 {
-    public function __ivnoke()
+    private $result;
+    public function __construct()
     {
         ini_set("session.use_trans_sid", true);
         session_start();
         $user = new User;
         if (isset($_SESSION['id'])) {
             if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
-                //если cookie есть, обновляется время их жизни и возвращается true
-                SetCookie("login", "", time() - 1, '/');
-                SetCookie("password", "", time() - 1, '/');
+                setcookie("login", "", time() - 1, '/');
+                setcookie("password", "", time() - 1, '/');
                 setcookie("login", $_COOKIE['login'], time() + 50000, '/');
                 setcookie("password", $_COOKIE['password'], time() + 50000, '/');
                 $id = $_SESSION['id'];
-                return true;
-            } else //иначе добавляются cookie с логином и паролем, чтобы после перезапуска браузера сессия не слетала
-            {
+                $this->result = true;
+            } else {
                 $user = $user->getAllById($_SESSION['id']);
                 if ($user) {
                     setcookie("login", $user['login'], time() + 50000, '/');
-                    setcookie("password", md5($user['password']), time() + 50000, '/');
+                    setcookie("password", sha1($user['password']), time() + 50000, '/');
                     $id = $_SESSION['id'];
-                    return true;
+                    $this->result = true;
                 } else {
-                    return false;
+                    $this->result = false;
                 }
             }
         } else {
-            if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) { //если куки существуют
-                //запрашивается строка с искомым логином и паролем
-                $user = $user->getAllById($_SESSION['id']);
+            if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
 
-                if ($user && md5($user['password']) == $_COOKIE['password']) {  //если логин и пароль нашлись в базе данных
+                $user = $user->getAllById($_SESSION['id']);
+                if ($user && sha1($user['password']) == $_COOKIE['password']) {
                     $_SESSION['id'] = $user['id']; //записываем в сесиию id
                     $id = $_SESSION['id'];
-                    return true;
-                } else {//если данные из cookie не подошли, эти куки удаляются
-                    SetCookie("login", "", time() - 360000, '/');
-                    SetCookie("password", "", time() - 360000, '/');
-                    return false;
+                    $this->result = true;
+                } else {
+                    setcookie("login", "", time() - 360000, '/');
+                    setcookie("password", "", time() - 360000, '/');
+                    $this->result = false;
                 }
-            } else {//если куки не существуют
-                return false;
+            } else {
+                $this->result = false;
             }
         }
+    }
+
+    public function __invoke()
+    {
+        return $this->result;
     }
 }

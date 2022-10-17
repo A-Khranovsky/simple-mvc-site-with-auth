@@ -8,7 +8,7 @@ use App\models\User;
 
 class Enter
 {
-    private array $error;
+    public array $error;
     private int $id;
     public function __construct($login, $password)
     {
@@ -16,9 +16,7 @@ class Enter
         $user = $user->getAllLoginId($login);
 
         if ($login != "" && $password != "") { //если поля заполнены
-
             if ($user) {//если нашлась одна строка, значит такой юзер существует в базе данных
-                exit(var_dump(md5($password), $user['password']));
                 if (sha1($password) == $user['password']) {
                     setcookie("login", $user['login'], time() + 50000);
                     setcookie("password", sha1($user['password']), time() + 50000);
@@ -38,6 +36,6 @@ class Enter
 
     public function __invoke()
     {
-        return print_r($this->error);
+        return $this->error;
     }
 }

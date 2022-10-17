@@ -26,4 +26,19 @@ class Home extends View
         return $this;
     }
 
+    public function home()
+    {
+        $title = 'Home';
+        $body = <<<HTML
+        <div>Hello, </div>
+        <br />
+        <a href="/api/home?action=out">Exit</a>
+        HTML;
+        $this->replacements = [
+            '{{{title}}}' => $title,
+            '{{{body}}}' => $body
+        ];
+        return $this;
+    }
+
 }

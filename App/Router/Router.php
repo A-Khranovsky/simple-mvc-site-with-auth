@@ -9,6 +9,7 @@ class Router
     public string $queryType;
     public array|null $queryParams;
     public array|string|null $controllerAction = null;
+    public string|null $controller = null;
 
     private const uriTemplate = [
         'api' => null,
@@ -62,7 +63,7 @@ class Router
     public function __construct(
         public string $resource,
         public int|null $id = null,
-        public string|null $action = null
+        public string|null $action = null,
     )
     {
         $this->queryParams = match (true) {
@@ -70,7 +71,6 @@ class Router
             !empty(file_get_contents("php://input")) => file_get_contents("php://input"),
             default => [],
         };
-        //exit(var_dump($this->queryParams));
         $this->queryType = $_SERVER['REQUEST_METHOD'];
         if ($this->queryType == 'POST' && array_key_exists('HTTP_X_HTTP_METHOD', $_SERVER)) {
             if ($_SERVER['HTTP_X_HTTP_METHOD'] == 'DELETE') {

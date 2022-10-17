@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\Model;
 use App\models\User;
 use App\Services\Enter;
+use App\Services\Login;
+use App\Services\Logout;
 use App\Views\Home;
 use App\Views\View;
 
@@ -19,15 +21,47 @@ class HomeController extends Controller
         $this->home = new Home;
     }
 
-    public function home()
+    public function auth(...$params)
     {
-        return $this->home->authForm()->render();
+//        /** @var $action */
+//        if($action === 'out'){
+//            call_user_func(new Logout());
+            return $this->home->authForm()->render();
+//        } else {
+//            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+//            return $this->home->authForm()->render();
+//        }
+    }
+
+    public function home(...$params)
+    {
+//        /** @var $action */
+//        exit(var_dump($params));
+        if($params['action'] === 'out'){
+            //exit('erer');
+            call_user_func(new Logout);
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+            return $this->home->authForm()->render();
+        } else {
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+            return $this->home->home()->render();
+        }
     }
 
     public function login(...$params)
     {
-        //return print_r($params['user']);
-        $e = new Enter($params['user'], $params['password']);
-        return call_user_func($e);
+        $enter = new Enter($params['user'], $params['password']);
+        if(empty(call_user_func($enter)))
+        {
+            if(new Login){
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+                return $this->home->home()->render();;
+            } else {
+                return 'not logged in';
+            }
+        } else {
+            return $enter->error;
+        }
+        //return call_user_func($e);
     }
 }

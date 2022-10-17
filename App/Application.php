@@ -22,12 +22,14 @@ class Application
         $db = new Database($connection);
         $router = Router::run($uri);
         Route::take()->run($router);
+        //exit(var_dump($router));
         Model::run($db);
         $this->controllerActionResult = Controller::run(
             $router->resource,
             $router->id,
             $router->controllerAction,
-            $router->queryParams
+            $router->queryParams,
+            $router->controller
         );
         //$user = new User($db);
     }

@@ -10,4 +10,4 @@ use App\Application;
 
 $obj = new Application($connection, $_SERVER['REQUEST_URI']);
 
-echo $obj->controllerActionResult;
+echo var_dump($obj->controllerActionResult);

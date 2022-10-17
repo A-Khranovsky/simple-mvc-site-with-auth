@@ -30,9 +30,30 @@ class Home extends View
     {
         $title = 'Home';
         $body = <<<HTML
-        <div>Hello, </div>
+        <div>Hello, {$_SESSION['login']}</div>
         <br />
         <a href="/api/home?action=out">Exit</a>
+        HTML;
+        $this->replacements = [
+            '{{{title}}}' => $title,
+            '{{{body}}}' => $body
+        ];
+        return $this;
+    }
+
+    public function error($message)
+    {
+        $title = 'Error';
+        $body = <<<HTML
+        <h2>Error was occured:</h2>
+        HTML;
+        foreach ($message as $item){
+            $body .= '<p>' . $item . '</p>';
+        }
+        $body .= <<<HTML
+        <p></p>
+        <br />
+        <a href="/api/auth">Login</a>
         HTML;
         $this->replacements = [
             '{{{title}}}' => $title,

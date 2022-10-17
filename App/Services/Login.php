@@ -12,8 +12,8 @@ class Login
     private $result;
     public function __construct()
     {
-        ini_set("session.use_trans_sid", true);
-        session_start();
+        //ini_set("session.use_trans_sid", true);
+//        session_start();
         $user = new User;
         if (isset($_SESSION['id'])) {
             if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
@@ -21,14 +21,14 @@ class Login
                 setcookie("password", "", time() - 1, '/');
                 setcookie("login", $_COOKIE['login'], time() + 50000, '/');
                 setcookie("password", $_COOKIE['password'], time() + 50000, '/');
-                $id = $_SESSION['id'];
+                //$id = $_SESSION['id'];
                 $this->result = true;
             } else {
                 $user = $user->getAllById($_SESSION['id']);
                 if ($user) {
                     setcookie("login", $user['login'], time() + 50000, '/');
                     setcookie("password", sha1($user['password']), time() + 50000, '/');
-                    $id = $_SESSION['id'];
+                    //$id = $_SESSION['id'];
                     $this->result = true;
                 } else {
                     $this->result = false;
@@ -40,7 +40,8 @@ class Login
                 $user = $user->getAllById($_SESSION['id']);
                 if ($user && sha1($user['password']) == $_COOKIE['password']) {
                     $_SESSION['id'] = $user['id']; //записываем в сесиию id
-                    $id = $_SESSION['id'];
+                    $_SESSION['login'] = $user['login'];
+                    //$id = $_SESSION['id'];
                     $this->result = true;
                 } else {
                     setcookie("login", "", time() - 360000, '/');

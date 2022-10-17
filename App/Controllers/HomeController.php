@@ -29,14 +29,17 @@ class HomeController extends Controller
 
     public function home(...$params)
     {
-        if ($params['action'] === 'out') {
-            call_user_func(new Logout);
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
-            return $this->home->authForm()->render();
-        } else {
-            //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
-            return $this->home->home()->render();
+        if(isset($params['action'])){
+            if ($params['action'] === 'out') {
+                call_user_func(new Logout);
+                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+                return $this->home->authForm()->render();
+            } else {
+                //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+                return $this->home->home()->render();
+            }
         }
+        return $this->home->home()->render();
     }
 
     public function login(...$params)

@@ -20,9 +20,7 @@ class HomeController extends Controller
 
     public function auth(...$params)
     {
-        $login = new Login;
-        //echo var_dump('session:', $_SESSION, 'cookie: ', $_COOKIE['login'], $_COOKIE['password']);
-        if (call_user_func($login) === true) {
+        if (call_user_func(new Login) === true) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
             return $this->home->home()->render();
         } else {

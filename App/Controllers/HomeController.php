@@ -12,19 +12,24 @@ use App\Views\View;
 
 class HomeController extends Controller
 {
-    private Model $user;
     private View $home;
 
     public function __construct()
     {
-        $this->user = new User;
         $this->home = new Home;
         session_start();
     }
 
     public function auth(...$params)
     {
-        return $this->home->authForm()->render();
+        $login = new Login;
+        var_dump(call_user_func($login));
+        if (call_user_func($login) === true) {
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+            return $this->home->home()->render();
+        } else {
+            return $this->home->authForm()->render();
+        }
     }
 
     public function home(...$params)
@@ -46,7 +51,7 @@ class HomeController extends Controller
     {
         $enter = new Enter($params['user'], $params['password']);
         if (empty(call_user_func($enter))) {
-            if (new Login) {
+            if (call_user_func(new Login)) {
                 header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
                 return $this->home->home()->render();
             } else {
@@ -55,6 +60,5 @@ class HomeController extends Controller
         } else {
             return $this->home->error($enter->error)->render();
         }
-        //return call_user_func($e);
     }
 }

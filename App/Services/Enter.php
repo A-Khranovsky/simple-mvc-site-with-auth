@@ -9,18 +9,16 @@ use App\models\User;
 class Enter
 {
     public array $error;
-    //private int $id;
     public function __construct($login, $password)
     {
         $user = new User;
-        $user = $user->getAllLoginId($login);
-        //session_start();
+        $user = $user->getAllByLogin($login);
 
-        if ($login != "" && $password != "") { //если поля заполнены
-            if ($user) {//если нашлась одна строка, значит такой юзер существует в базе данных
-                if (sha1($password) == $user['password']) {
+        if ($login != "" && $password != "") {
+            if ($user) {
+                if (sha1($password) === $user['password']) {
                     setcookie("login", $user['login'], time() + 50000);
-                    setcookie("password", sha1($user['password']), time() + 50000);
+                    setcookie("password", $user['password'], time() + 50000);
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['login'] = $user['login'];
                     //$this->id = $_SESSION['id'];

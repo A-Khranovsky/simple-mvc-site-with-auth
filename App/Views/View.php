@@ -21,7 +21,7 @@ abstract class View
 	</html>
 	HTML;
 
-    public function render()
+    public function render(): array|string
     {
         return str_replace(
             array_keys($this->replacements),

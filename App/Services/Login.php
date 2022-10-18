@@ -17,7 +17,7 @@ class Login
         $this->user = new User;
     }
 
-    public function __invoke()
+    public function __invoke(): bool
     {
         if (isset($_SESSION['id'])) {
             if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {

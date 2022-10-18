@@ -18,7 +18,7 @@ class HomeController extends Controller
         session_start();
     }
 
-    public function auth(...$params)
+    public function auth(...$params): array|string
     {
         if (call_user_func(new Login) === true) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
@@ -28,7 +28,7 @@ class HomeController extends Controller
         }
     }
 
-    public function home(...$params)
+    public function home(...$params): array|string
     {
         if(call_user_func(new Login) === true) {
             if (isset($params['action'])) {
@@ -46,7 +46,7 @@ class HomeController extends Controller
         }
     }
 
-    public function login(...$params)
+    public function login(...$params): array|string
     {
         $enter = new Enter($params['user'], $params['password']);
         if (empty(call_user_func($enter))) {

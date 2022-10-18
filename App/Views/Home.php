@@ -6,7 +6,7 @@ namespace App\Views;
 
 class Home extends View
 {
-    public function authForm()
+    public function authForm(): static
     {
         $title = 'Login';
         $body = <<<HTML
@@ -26,7 +26,7 @@ class Home extends View
         return $this;
     }
 
-    public function home()
+    public function home(): static
     {
         $title = 'Home';
         $body = <<<HTML
@@ -41,7 +41,7 @@ class Home extends View
         return $this;
     }
 
-    public function error($message)
+    public function error($message): static
     {
         $title = 'Error';
         $body = <<<HTML

@@ -23,17 +23,17 @@ class Enter
                     $_SESSION['login'] = $user['login'];
                     $this->error = [];
                 } else {
-                    $this->error[] = "Неверный пароль";
+                    $this->error[] = "Wrong password";
                 }
             } else {
-                $this->error[] = "Неверный логин и пароль";
+                $this->error[] = "Wrong login and password";
             }
         } else {
-            $this->error[] = "Поля не должны быть пустыми!";
+            $this->error[] = "Login and password fields must not be empty";
         }
     }
 
-    public function __invoke()
+    public function __invoke(): array
     {
         return $this->error;
     }

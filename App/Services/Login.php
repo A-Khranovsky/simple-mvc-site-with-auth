@@ -10,7 +10,7 @@ use App\models\User;
 class Login
 {
     //Checking if user is logged in
-    private $user;
+    private User $user;
 
     public function __construct()
     {

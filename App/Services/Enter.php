@@ -9,14 +9,14 @@ use App\models\User;
 class Enter
 {
     public array $error;
-    public function __construct($login, $pass)
+    public function __construct($login, $password)
     {
         $user = new User;
         $user = $user->getAllByLogin($login);
 
-        if ($login != "" && $pass != "") {
+        if ($login != "" && $password != "") {
             if ($user) {
-                if (sha1($pass) === $user['password']) {
+                if (sha1($password) === $user['password']) {
                     //setcookie("login", $user['login'], time() + 50000);
                     //setcookie("password", $user['password'], time() + 50000);
                     $_SESSION['id'] = $user['id'];

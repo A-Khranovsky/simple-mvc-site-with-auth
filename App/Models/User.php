@@ -38,7 +38,7 @@ class User extends Model
         return $result->fetch(Database::FETCH_ASSOC);
     }
 
-    public function getAllByLogin($login): array
+    public function getAllByLogin($login): array|bool
     {
         $sql = "select * from users where login=:login";
 

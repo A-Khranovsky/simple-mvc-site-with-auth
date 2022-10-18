@@ -10,6 +10,6 @@ use App\Application;
 
 $obj = new Application($connection, $_SERVER['REQUEST_URI']);
 
-//echo var_dump($_SESSION, $_COOKIE);
+//echo var_dump($_SESSION['password'], $_COOKIE['password']);
 
 echo $obj->controllerActionResult;

@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Model;
-use App\models\User;
 use App\Services\Enter;
 use App\Services\Login;
 use App\Services\Logout;
@@ -23,7 +21,7 @@ class HomeController extends Controller
     public function auth(...$params)
     {
         $login = new Login;
-        var_dump(call_user_func($login));
+        //echo var_dump('session:', $_SESSION, 'cookie: ', $_COOKIE['login'], $_COOKIE['password']);
         if (call_user_func($login) === true) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
             return $this->home->home()->render();
@@ -34,17 +32,20 @@ class HomeController extends Controller
 
     public function home(...$params)
     {
-        if(isset($params['action'])){
-            if ($params['action'] === 'out') {
-                call_user_func(new Logout);
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
-                return $this->home->authForm()->render();
+        if(call_user_func(new Login) === true) {
+            if (isset($params['action'])) {
+                if ($params['action'] === 'out') {
+                    call_user_func(new Logout);
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+                    return $this->home->authForm()->render();
+                }
             } else {
-                //header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
                 return $this->home->home()->render();
             }
+        } else {
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+            return $this->home->authForm()->render();
         }
-        return $this->home->home()->render();
     }
 
     public function login(...$params)

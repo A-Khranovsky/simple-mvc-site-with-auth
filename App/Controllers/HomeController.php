@@ -50,12 +50,8 @@ class HomeController extends Controller
     {
         $enter = new Enter($params['user'], $params['password']);
         if (empty(call_user_func($enter))) {
-            if (call_user_func(new Login)) {
-                header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
-                return $this->home->home()->render();
-            } else {
-                return 'not logged in';
-            }
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+            return $this->home->home()->render();
         } else {
             return $this->home->error($enter->error)->render();
         }

@@ -7,7 +7,6 @@ namespace App;
 use App\Controllers\Controller;
 use App\Database\Database;
 use App\Models\Model;
-use App\models\User;
 use App\Router\Route;
 use App\Router\Router;
 

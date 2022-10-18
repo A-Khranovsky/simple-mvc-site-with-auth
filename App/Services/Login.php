@@ -11,6 +11,7 @@ class Login
 {
     //Checking if user is logged in
     private $user;
+
     public function __construct()
     {
         $this->user = new User;
@@ -22,7 +23,6 @@ class Login
             if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
                 setcookie("login", "", time() - 1, '/');
                 setcookie("password", "", time() - 1, '/');
-                //exit(var_dump($_COOKIE['login']));
                 setcookie("login", $_COOKIE['login'], time() + 50000, '/');
                 setcookie("password", $_COOKIE['password'], time() + 50000, '/');
                 return true;
@@ -36,12 +36,11 @@ class Login
                     return false;
                 }
             }
-            return true;
         } else {
             if (isset($_COOKIE['login']) && isset($_COOKIE['password'])) {
                 $user = $this->user->getAllByLogin($_COOKIE['login']);
                 if ($user && $user['password'] == $_COOKIE['password']) {
-                    $_SESSION['id'] = $user['id']; //записываем в сесиию id
+                    $_SESSION['id'] = $user['id'];
                     $_SESSION['login'] = $user['login'];
                     return true;
                 } else {
@@ -52,7 +51,6 @@ class Login
             } else {
                 return false;
             }
-            return false;
         }
     }
 }

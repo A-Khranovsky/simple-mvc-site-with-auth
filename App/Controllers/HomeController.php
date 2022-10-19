@@ -53,7 +53,7 @@ class HomeController extends Controller
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/home');
             return $this->home->home()->render();
         } else {
-            return $this->home->error($enter->error)->render();
+            return $this->home->error($enter->error,'/auth','Login')->render();
         }
     }
 }

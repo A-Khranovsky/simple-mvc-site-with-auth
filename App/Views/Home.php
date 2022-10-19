@@ -41,7 +41,7 @@ class Home extends View
         return $this;
     }
 
-    public function error($message): static
+    public function error($message, $route, $linkName): static
     {
         $title = 'Error';
         $body = <<<HTML
@@ -53,7 +53,7 @@ class Home extends View
         $body .= <<<HTML
         <p></p>
         <br />
-        <a href="/auth">Login</a>
+        <a href="$route">$linkName</a>
         HTML;
         $this->replacements = [
             '{{{title}}}' => $title,

@@ -10,7 +10,7 @@ class Home extends View
     {
         $title = 'Login';
         $body = <<<HTML
-        <form method="POST" action="/api/home/login">
+        <form method="POST" action="/home/login">
         Enter user name: <br>
         <input type="text" name="user" /><br>
         Enter password: <br>
@@ -32,7 +32,7 @@ class Home extends View
         $body = <<<HTML
         <div>Hello, {$_SESSION['login']}</div>
         <br />
-        <a href="/api/home?action=out">Exit</a>
+        <a href="/home?action=out">Exit</a>
         HTML;
         $this->replacements = [
             '{{{title}}}' => $title,
@@ -53,7 +53,7 @@ class Home extends View
         $body .= <<<HTML
         <p></p>
         <br />
-        <a href="/api/auth">Login</a>
+        <a href="/auth">Login</a>
         HTML;
         $this->replacements = [
             '{{{title}}}' => $title,

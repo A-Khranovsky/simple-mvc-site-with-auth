@@ -12,7 +12,6 @@ class Router
     public string|null $controller = null;
 
     private const uriTemplate = [
-        'api' => null,
         'resource' => null,
         'idOrAction' => null,
         'action' => null,

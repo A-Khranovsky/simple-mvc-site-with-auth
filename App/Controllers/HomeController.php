@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function auth(...$params): array|string
     {
         if (call_user_func(new Login) === true) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/home');
             return $this->home->home()->render();
         } else {
             return $this->home->authForm()->render();
@@ -34,14 +34,14 @@ class HomeController extends Controller
             if (isset($params['action'])) {
                 if ($params['action'] === 'out') {
                     call_user_func(new Logout);
-                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+                    header('Location: http://' . $_SERVER['HTTP_HOST'] . '/auth');
                     return $this->home->authForm()->render();
                 }
             } else {
                 return $this->home->home()->render();
             }
         } else {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/auth');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/auth');
             return $this->home->authForm()->render();
         }
     }
@@ -50,7 +50,7 @@ class HomeController extends Controller
     {
         $enter = new Enter($params['user'], $params['password']);
         if (empty(call_user_func($enter))) {
-            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/api/home');
+            header('Location: http://' . $_SERVER['HTTP_HOST'] . '/home');
             return $this->home->home()->render();
         } else {
             return $this->home->error($enter->error)->render();

@@ -17,8 +17,8 @@ class Enter
         if ($login != "" && $password != "") {
             if ($user) {
                 if (sha1($password) === $user['password']) {
-                    //setcookie("login", $user['login'], time() + 50000);
-                    //setcookie("password", $user['password'], time() + 50000);
+                    setcookie("login", $user['login'], time() + 50000, '/');
+                    setcookie("password", $user['password'], time() + 50000, '/');
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['login'] = $user['login'];
                     $this->error = [];

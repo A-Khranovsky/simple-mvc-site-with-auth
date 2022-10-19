@@ -44,8 +44,8 @@ class Login
                     $_SESSION['login'] = $user['login'];
                     return true;
                 } else {
-                    setcookie("login", "", time() - 360000, '/');
-                    setcookie("password", "", time() - 360000, '/');
+                    setcookie("login", "", -1, '/');
+                    setcookie("password", "", -1, '/');
                     return false;
                 }
             } else {

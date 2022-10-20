@@ -14,7 +14,7 @@ to auth page automatically. Project handles exceptions in case: wrong url, wrong
 of login & password. Password is stored in hash condition by SHA1.
 #### How to run
 * Clone the repository 
-* Create file .env and copy data from .env.example in it
+* Create file (in root dir of project) .env and copy data from .env.example in it
 * ```docker-compose up -d```
 * ```docker exec -it 59_mysql_1 /bin/sh```
 * ```mysql -u root -p ``` password is: secret

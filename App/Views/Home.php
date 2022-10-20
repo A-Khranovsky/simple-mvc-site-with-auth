@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Views;
-
 
 class Home extends View
 {
@@ -46,7 +44,7 @@ class Home extends View
         $body = <<<HTML
         <h2>Error was occured:</h2>
         HTML;
-        foreach ($message as $item){
+        foreach ($message as $item) {
             $body .= '<p>' . $item . '</p>';
         }
         $body .= <<<HTML
@@ -60,5 +58,4 @@ class Home extends View
         ];
         return $this;
     }
-
 }

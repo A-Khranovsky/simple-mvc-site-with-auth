@@ -14,13 +14,13 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->home = new Home;
+        $this->home = new Home();
         session_start();
     }
 
     public function auth(...$params): array|string
     {
-        if (call_user_func(new Login) === true) {
+        if (call_user_func(new Login()) === true) {
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/home');
             return $this->home->home()->render();
         } else {
@@ -30,10 +30,10 @@ class HomeController extends Controller
 
     public function home(...$params): array|string
     {
-        if(call_user_func(new Login) === true) {
+        if (call_user_func(new Login()) === true) {
             if (isset($params['action'])) {
                 if ($params['action'] === 'out') {
-                    call_user_func(new Logout);
+                    call_user_func(new Logout());
                     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/auth');
                     return $this->home->authForm()->render();
                 }
@@ -53,7 +53,7 @@ class HomeController extends Controller
             header('Location: http://' . $_SERVER['HTTP_HOST'] . '/home');
             return $this->home->home()->render();
         } else {
-            return $this->home->error($enter->error,'/auth','Login')->render();
+            return $this->home->error($enter->error, '/auth', 'Login')->render();
         }
     }
 }

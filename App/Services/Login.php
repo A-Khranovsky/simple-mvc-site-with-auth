@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Services;
-
 
 use App\Database\Database;
 use App\models\User;
@@ -14,7 +12,7 @@ class Login
 
     public function __construct()
     {
-        $this->user = new User;
+        $this->user = new User();
     }
 
     public function __invoke(): bool

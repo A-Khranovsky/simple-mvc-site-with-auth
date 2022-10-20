@@ -16,16 +16,15 @@ abstract class Controller
         string|null $action,
         array $queryParams,
         string|null $controller,
-    ): array|string|null
-    {
-        if(!is_null($controller)) {
+    ): array|string|null {
+        if (!is_null($controller)) {
             $controllerName = $controller;
         } else {
             $controllerName = $resource . 'Controller';
         }
         $controllerClass = __NAMESPACE__ . '\\' . ucfirst($controllerName);
         if (class_exists($controllerClass)) {
-            $controller = new $controllerClass;
+            $controller = new $controllerClass();
             $params = (is_null($id) && !empty($queryParams)) ? $queryParams : [$id, $queryParams];
             return call_user_func_array([$controller, $action], $params);
         } else {

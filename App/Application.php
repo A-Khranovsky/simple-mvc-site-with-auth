@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App;
-
 
 use App\Controllers\Controller;
 use App\Database\Database;
@@ -13,7 +11,7 @@ use App\Views\Home;
 
 class Application
 {
-    public array|string|null  $controllerActionResult;
+    public array|string|null $controllerActionResult;
     /**
      * @throws \Exception
      */
@@ -31,9 +29,9 @@ class Application
                 $router->queryParams,
                 $router->controller
             );
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $this->controllerActionResult =
-                (new Home())->error([$exception->getMessage()],'/home', 'Home')
+                (new Home())->error([$exception->getMessage()], '/home', 'Home')
             ->render();
         }
     }

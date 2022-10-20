@@ -20,7 +20,7 @@ class Database
     /**
      * @throws \Exception
      */
-    public function __construct($connection)
+    public function __construct(array $connection)
     {
         /** @var $driver */
         /** @var $host */

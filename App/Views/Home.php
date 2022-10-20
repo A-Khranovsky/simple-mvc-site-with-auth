@@ -18,7 +18,6 @@ class Home extends View
         <input type="submit" value="Enter" />
         </form>
         HTML;
-
         $this->replacements = [
             '{{{title}}}' => $title,
             '{{{body}}}' => $body
@@ -41,7 +40,7 @@ class Home extends View
         return $this;
     }
 
-    public function error($message, $route, $linkName): static
+    public function error(array $message, string $route, string $linkName): static
     {
         $title = 'Error';
         $body = <<<HTML

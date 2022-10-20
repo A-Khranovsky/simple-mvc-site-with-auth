@@ -10,7 +10,12 @@ class Route
     private static $PATCH = [];
     private static $DELETE = [];
 
-    public static function get(string $resource, string|null $action, string|null $controllerAction, string|null $controller = null)
+    public static function get(
+        string $resource,
+        string|null $action,
+        string|null $controllerAction,
+        string|null $controller = null
+    )
     {
         self::$GET[] = [$resource, $action, $controllerAction, $controller];
         if (is_null(self::$instance)) {
@@ -18,7 +23,12 @@ class Route
         }
     }
 
-    public static function post(string $resource, string|null $action, string|null $controllerAction, string|null $controller = null)
+    public static function post(
+        string $resource,
+        string|null $action,
+        string|null $controllerAction,
+        string|null $controller = null
+    )
     {
         self::$POST[] = [$resource, $action, $controllerAction, $controller];
         if (is_null(self::$instance)) {
@@ -26,7 +36,12 @@ class Route
         }
     }
 
-    public static function patch(string $resource, string|null $action, string|null $controllerAction, string|null $controller = null)
+    public static function patch(
+        string $resource,
+        string|null $action,
+        string|null $controllerAction,
+        string|null $controller = null
+    )
     {
         self::$PATCH[] = [$resource, $action, $controllerAction, $controller];
         if (is_null(self::$instance)) {
@@ -34,7 +49,12 @@ class Route
         }
     }
 
-    public static function delete(string $resource, string|null $action, string|null $controllerAction, string|null $controller = null)
+    public static function delete(
+        string $resource,
+        string|null $action,
+        string|null $controllerAction,
+        string|null $controller = null
+    )
     {
         self::$DELETE[] = [$resource, $action, $controllerAction, $controller];
         if (is_null(self::$instance)) {

@@ -6,7 +6,7 @@ use App\Database\Database;
 
 abstract class Model
 {
-    public static $db;
+    public static Database $db;
     public static function run(Database $database)
     {
         self::$db = $database;

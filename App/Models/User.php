@@ -15,7 +15,7 @@ class User extends Model
         $this->database = self::$db;
     }
 
-    public function login($userName, $password): array
+    public function login(string $userName, string $password): array
     {
         $sql = "select id from users where login=:userName and password=:password";
 
@@ -27,7 +27,7 @@ class User extends Model
         return $result->fetch(Database::FETCH_ASSOC);
     }
 
-    public function getAllById($id): array
+    public function getAllById(int $id): array
     {
         $sql = "select * from users where id=:id";
 
@@ -38,7 +38,7 @@ class User extends Model
         return $result->fetch(Database::FETCH_ASSOC);
     }
 
-    public function getAllByLogin($login): array|bool
+    public function getAllByLogin(string $login): array|bool
     {
         $sql = "select * from users where login=:login";
 

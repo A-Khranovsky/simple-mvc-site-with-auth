@@ -9,7 +9,7 @@ use App\models\User;
 class Enter
 {
     public array $error;
-    public function __construct($login, $password)
+    public function __construct(string $login, string $password)
     {
         $user = new User;
         $user = $user->getAllByLogin($login);

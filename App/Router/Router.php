@@ -18,6 +18,9 @@ class Router
         'queryParams' => []
     ];
 
+    /**
+     * @throws Exception
+     */
     public static function run(string $uri): Router
     {
         $id = null;

@@ -17,7 +17,7 @@ class Application
     /**
      * @throws \Exception
      */
-    public function __construct($connection, $uri)
+    public function __construct(array $connection, string $uri)
     {
         try {
             $db = new Database($connection);

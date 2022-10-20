@@ -18,11 +18,9 @@ of login & password. Password is stored in hash condition by SHA1.
 * ```docker-compose up -d```
 * ```docker exec -it 59_mysql_1 /bin/sh```
 * ```mysql -u root -p ``` password is: secret
-* ```use mysql;```
+* ```use mydb;```
 * Run SQL queries:
 ```sql
-use mydb;
-
 create table users(
                       id int not null auto_increment,
                       login varchar(255) not null,

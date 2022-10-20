@@ -11,7 +11,7 @@ user are able to open home page, session is extends (if browser were closed cook
 time. if you open the browser it will redirect to home page. Browser must not delete cookies). If authenticated 
 user opens auth page (http://localhost/auth) he will be redirected to home page. Logout is redirect from home page
 to auth page automatically. Project handles exceptions in case: wrong url, wrong login & password, empty fields 
-of login & password.
+of login & password. Password is stored in hash condition by SHA1.
 #### How to run
 * Clone the repository 
 * Create file .env and copy data from .env.example in it
